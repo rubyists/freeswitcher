@@ -28,6 +28,28 @@ describe "Testing FSR::Cmd::Sofia" do
     status = sofia.status(:status => 'gateway', :name => 'server')
     status.raw.should == "sofia status gateway server"
   end
+  ## Sofia XML Status ##
+  it "FSR::Cmd::Sofia should allow xmlstatus" do
+    sofia = FSR::Cmd::Sofia.new
+    status = sofia.status(:xml_status => true)
+    status.raw.should == "sofia xmlstatus"
+  end
+  # Sofia XML Status profile internal
+  it "FSR::Cmd::Sofia should allow status profile internal" do
+    sofia = FSR::Cmd::Sofia.new
+    status = sofia.status(:status => 'profile', 
+                            :name => 'internal',
+                      :xml_status => true)
+    status.raw.should == "sofia xmlstatus profile internal"
+  end
+  # Sofia XML Status gateway server 
+  it "FSR::Cmd::Sofia should allow status gateway server" do
+    sofia = FSR::Cmd::Sofia.new
+    status = sofia.status(:status => 'gateway', 
+                            :name => 'server',
+                      :xml_status => true)
+    status.raw.should == "sofia xmlstatus gateway server"
+  end
 
   ## Sofia profile ##
   it "FSR::Cmd::Sofia should allow profile" do
