@@ -9,6 +9,7 @@ module FSR
           @fs_socket = fs_socket # FSR::CommandSocket object
           @status  = args[:status] # Status type; profile or gateway
           @name = args[:name] # Name of profile or gateway
+          @xml_status = !!args[:xml_status] # Return results in xml rather than text
           # If status is given, make sure it's profile or gateway
           unless @status.nil?
             raise "status must be profile or gateway" unless @status =~ /profile|gateway/i
@@ -27,10 +28,11 @@ module FSR
 
         # This method builds the API command to send to the freeswitch event socket
         def raw
+          status_type = @xml_status ? 'xmlstatus' : 'status'
           if @status and @name
-            orig_command = "sofia status #{@status} #{@name}"
+            orig_command = "sofia #{status_type} #{@status} #{@name}"
           else
-            orig_command = "sofia status"
+            orig_command = "sofia #{status_type}"
           end
         end
       end
