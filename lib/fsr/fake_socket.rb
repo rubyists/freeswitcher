@@ -49,8 +49,12 @@ require 'bacon'
 Bacon.summary_at_exit
 
 describe FSR::FakeSocket do
-  it 'can be initialized' do
+
+  before do 
     @socket = FSR::FakeSocket.new('google.com', 80)
+  end
+
+  it 'can be initialized' do
     @socket.should.not.be.nil
   end
 
