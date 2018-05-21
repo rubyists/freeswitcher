@@ -30,8 +30,9 @@ module FSR
             call_info, count = resp["body"].split("\n\n")
             require "fsr/model/channel"
             require "csv"
+            
             call_info.match(/\{([^)]+)\}/)[0...-1].each do |m|
-              ss = m.sub(',', ';')
+              ss = m.gsub(',', '\,')
               call_info = call_info.gsub(m, ss)
             end
             channels = CSV.parse(call_info, liberal_parsing: true) 
