@@ -32,7 +32,7 @@ module FSR
             require "csv"
             
             call_info.match(/\{([^)]+)\}/)[0...-1].each do |m|
-              ss = m.gsub(',', '\,')
+              ss = m.gsub(',', ';')
               call_info = call_info.gsub(m, ss)
             end
             channels = CSV.parse(call_info, liberal_parsing: true) 
