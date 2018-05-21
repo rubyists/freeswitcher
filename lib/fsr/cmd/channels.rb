@@ -31,9 +31,11 @@ module FSR
             require "fsr/model/channel"
             require "csv"
             
-            call_info.match(/\{([^)]+)\}/)[0...-1].each do |m|
-              ss = m.gsub(',', ';')
-              call_info = call_info.gsub(m, ss)
+            if call_info.match(/\{([^)]+)\}/)
+              call_info.match(/\{([^)]+)\}/)[0...-1].each do |m|
+                ss = m.gsub(',', ';')
+                call_info = call_info.gsub(m, ss)
+              end
             end
             channels = CSV.parse(call_info, liberal_parsing: true) 
             headers = channels[0]
