@@ -30,6 +30,10 @@ module FSR
           call_info, count = resp["body"].split("\n\n")
           require "fsr/model/call"
           require "csv"
+          call_info.match(/\{([^)]+)\}/)[0...-1].each do |m|
+            ss = m.sub(',', ';')
+            @call_info = s.gsub(m, ss)
+          end
           @calls = CSV.parse(call_info, liberal_parsing: true)
           return @calls[1 .. -1].map { |c| FSR::Model::Call.new(@calls[0],*c) }
         end
