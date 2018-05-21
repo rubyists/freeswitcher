@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{freeswitcher}
-  s.version = "0.4.10"
+  s.version = "0.4.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jayson Vaughn", "Michael Fellinger", "Kevin Berry", "TJ Vanderpoel"]
@@ -19,7 +19,7 @@ A ruby library for interacting with the "FreeSWITCH" (http://www.freeswitch.org)
 
 REQUIREMENTS
 ------------
-* ruby (>= 1.8)
+* ruby (>= 2.4)
 * eventmachine (If you wish to use Outbound and Inbound listener)
 
 USAGE
