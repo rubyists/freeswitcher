@@ -34,7 +34,7 @@ module FSR
             ss = m.sub(',', ';')
             @call_info = call_info.gsub(m, ss)
           end
-          @calls = CSV.parse(call_info, liberal_parsing: true)
+          @calls = CSV.parse(@call_info, liberal_parsing: true)
           return @calls[1 .. -1].map { |c| FSR::Model::Call.new(@calls[0],*c) }
         end
         []
