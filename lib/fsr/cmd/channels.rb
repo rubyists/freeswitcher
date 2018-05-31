@@ -37,6 +37,8 @@ module FSR
                 call_info = call_info.gsub(m, ss)
               end
             end
+            call_info = call_info.gsub("set,", "set;")
+            call_info = call_info.gsub(",loopback", ";loopback")
             channels = CSV.parse(call_info, liberal_parsing: true) 
             headers = channels[0]
             @channels = channels[1 .. -1].map { |c| FSR::Model::Channel.new(headers ,*c) }
