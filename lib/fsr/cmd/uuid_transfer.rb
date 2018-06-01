@@ -6,8 +6,14 @@ module FSR
       def initialize(fs_socket = nil, args = {})
         @fs_socket = fs_socket # FSR::CommandSocket obj
         args = DEFAULTS.merge(args)
-        both, @uuid, @to, @context, @dialplan = args.values_at(:both, :uuid, :to, :context, :dialplan)
-        @leg = both ? '-both' : '-bleg'
+        leg, @uuid, @to, @context, @dialplan = args.values_at(:leg, :uuid, :to, :context, :dialplan)
+        if leg == 'both'
+          @leg = '-both'
+        elsif leg = 'bleg'
+          @leg = '-bleg'
+        else
+          @leg = ""
+        end
         raise(ArgumentError, "No uuid given") unless @uuid
         raise(ArgumentError, "No to: extension given") unless @to
       end
