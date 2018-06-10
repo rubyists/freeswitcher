@@ -2,11 +2,14 @@ require "fsr/app"
 module FSR
   module Cmd
     class UuidHold < Command
-      DEFAULTS = {}
-      def initialize(fs_socket = nil, args = {})
+      def initialize(fs_socket = nil, uuid_or_object)
         @fs_socket = fs_socket # FSR::CommandSocket obj
-        args = DEFAULTS.merge(args)
-        @uuid = args.values_at(:uuid)
+        # Either something that responds to :uuid or a string that is the uuid
+        if uuid_or_object.respond_to?(:uuid)
+          @uuid = uuid_or_object.uuid
+        else
+          @uuid = uuid_or_object
+        end
         raise(ArgumentError, "No uuid given") unless @uuid
       end
 
