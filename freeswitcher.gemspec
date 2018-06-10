@@ -146,7 +146,7 @@ A ruby library for interacting with the "FreeSWITCH" (http://www.freeswitch.org)
 
 REQUIREMENTS
 ------------
-* ruby (>= 1.8)
+* ruby (>= 2.4)
 * eventmachine (If you wish to use Outbound and Inbound listener)
 
 USAGE

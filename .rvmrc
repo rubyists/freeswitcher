@@ -1,2 +1,2 @@
-rvm --install --create use 1.9.3@freeswitcher
+rvm --install --create use 2.4.0@freeswitcher
 [[ -s .gems ]] && rvm gemset import .gems
