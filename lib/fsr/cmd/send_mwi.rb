@@ -16,7 +16,7 @@ module FSR
         @options =
           {
             'MWI-Messages-Waiting' => !@new.zero? ? 'yes' : 'no',
-            'MWI-Message-Account' => "sip:#{aor}"
+            'MWI-Message-Account' => "sip:#{@aor}"
           }.tap do |opts|
           opts['MWI-Voice-Message'] = "#{@new}/#{@read} (0/0)" if !@new.zero?
         end
@@ -26,8 +26,7 @@ module FSR
       def run(api_method = :api)
         orig_command = "%s %s" % [api_method, raw]
         Log.debug "saying #{orig_command}"
-        resp = @fs_socket.say(orig_command)
-        resp["body"].match(%r{^error/}) ? nil : resp["body"]
+        @fs_socket.say(orig_command)
       end
     
       # This method builds the API command to send to the freeswitch event socket
