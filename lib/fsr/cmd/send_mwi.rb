@@ -1,5 +1,4 @@
-# A lot of methods are missing here. The only one implemented is max_sessions
-# The max_sessions getter currently returns the raw result but could instead return an Integer
+# Adding the send_mwi method
 
 require "fsr/app"
 module FSR
@@ -24,7 +23,7 @@ module FSR
 
       # Send the command to the event socket, using api by default.
       def run(api_method = :api)
-        orig_command = "%s %s" % [raw]
+        orig_command = "%s" % [raw]
         Log.debug "saying #{orig_command}"
         puts "saying #{orig_command}"
         @fs_socket.say(orig_command)
