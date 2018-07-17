@@ -20,15 +20,15 @@ module FSR
 #          opts['MWI-Voice-Message'] = "#{@new}/#{@read} (0/0)" if !@new.zero?
 #        end
         if @new.zero?
-          @options = "\nMWI-Messages-Waiting: #{!@new.zero? ? 'yes' : 'no'}\nMWI-Message-Account: sip:#{@aor}"
+          @options = "\r\nMWI-Messages-Waiting: no\r\nMWI-Message-Account: sip:#{@aor}"
         else
-          @options = "\nMWI-Messages-Waiting: #{!@new.zero? ? 'yes' : 'no'}\nMWI-Message-Account: sip:#{@aor}\nMWI-Voice-Message: #{@new}/#{@read} (0/0)"
+          @options = "\r\nMWI-Messages-Waiting: yes\r\nMWI-Message-Account: sip:#{@aor}\r\nMWI-Voice-Message: #{@new}/#{@read} (0/0)"
         end
       end
 
       # Send the command to the event socket, using api by default.
-      def run(api_method = :api)
-        orig_command = "%s" % [raw]
+      def run(api_method = :sendevent)
+        orig_command = "%s %s" % [api_method, raw]
         Log.debug "saying #{orig_command}"
         puts "saying #{orig_command}"
         @fs_socket.say(orig_command)
@@ -36,7 +36,7 @@ module FSR
     
       # This method builds the API command to send to the freeswitch event socket
       def raw
-        orig_command = "sendevent  message_waiting #{@options}"
+        orig_command = "message_waiting #{@options}"
       end
     end
 
