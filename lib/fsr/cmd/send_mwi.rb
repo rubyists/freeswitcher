@@ -12,12 +12,17 @@ module FSR
         raise(ArgumentError, "No aor given") unless @aor
         raise(ArgumentError, "No new: count given") unless @new
         raise(ArgumentError, "No read: count given") unless @read
-        @options =
-          {
-            'MWI-Messages-Waiting' => !@new.zero? ? 'yes' : 'no',
-            'MWI-Message-Account' => "sip:#{@aor}"
-          }.tap do |opts|
-          opts['MWI-Voice-Message'] = "#{@new}/#{@read} (0/0)" if !@new.zero?
+#        @options =
+#          {
+#            'MWI-Messages-Waiting' => !@new.zero? ? 'yes' : 'no',
+#            'MWI-Message-Account' => "sip:#{@aor}"
+#          }.tap do |opts|
+#          opts['MWI-Voice-Message'] = "#{@new}/#{@read} (0/0)" if !@new.zero?
+#        end
+        if @new.zero
+          @options = "\nMWI-Messages-Waiting: #{!@new.zero? ? 'yes' : 'no'}\nMWI-Message-Account: sip:#{@aor}"
+        else
+          @options = "\nMWI-Messages-Waiting: #{!@new.zero? ? 'yes' : 'no'}\nMWI-Message-Account: sip:#{@aor}\nMWI-Voice-Message: #{@new}/#{@read} (0/0)"
         end
       end
 
