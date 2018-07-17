@@ -6,7 +6,7 @@ module FSR
     class SipResync < Command
       def initialize(fs_socket = nil, args = {})
         @fs_socket = fs_socket # FSR::CommandSocket obj
-        @aor = args.values_at(:aor)
+        @aor.first = args.values_at(:aor)
         raise(ArgumentError, "No aor given") unless @aor
         @options = "\r\nprofile: internal\r\ncontent-type: application/simple-message-summary\r\nevent-string: check-sync\r\nuser: #{@aor.split('@')[0]}\r\nhost: #{@aor.split('@')[1]}\r\ncontent-lengthcontent-length: 0"
       end
