@@ -20,9 +20,9 @@ module FSR
 #          opts['MWI-Voice-Message'] = "#{@new}/#{@read} (0/0)" if !@new.zero?
 #        end
         if @new.zero?
-          @options = "\r\nMWI-Messages-Waiting: no\r\nMWI-Message-Account: sip:#{@aor}"
+          @options = "\nMWI-Messages-Waiting: no\nMWI-Message-Account: sip:#{@aor}"
         else
-          @options = "\r\nMWI-Messages-Waiting: yes\r\nMWI-Message-Account: sip:#{@aor}\r\nMWI-Voice-Message: #{@new}/#{@read} (0/0)"
+          @options = "\nMWI-Messages-Waiting: yes\nMWI-Message-Account: sip:#{@aor}\nMWI-Voice-Message: #{@new}/#{@read} (0/0)"
         end
       end
 
