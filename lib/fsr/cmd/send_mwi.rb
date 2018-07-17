@@ -36,7 +36,7 @@ module FSR
     
       # This method builds the API command to send to the freeswitch event socket
       def raw
-        orig_command = "message_waiting #{@options}"
+        orig_command = " message_waiting #{@options}"
       end
     end
 
