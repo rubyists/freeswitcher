@@ -19,7 +19,7 @@ module FSR
 #          }.tap do |opts|
 #          opts['MWI-Voice-Message'] = "#{@new}/#{@read} (0/0)" if !@new.zero?
 #        end
-        if @new.zero
+        if @new.zero?
           @options = "\nMWI-Messages-Waiting: #{!@new.zero? ? 'yes' : 'no'}\nMWI-Message-Account: sip:#{@aor}"
         else
           @options = "\nMWI-Messages-Waiting: #{!@new.zero? ? 'yes' : 'no'}\nMWI-Message-Account: sip:#{@aor}\nMWI-Voice-Message: #{@new}/#{@read} (0/0)"
