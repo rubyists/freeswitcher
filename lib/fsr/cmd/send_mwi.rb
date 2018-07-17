@@ -12,23 +12,16 @@ module FSR
         raise(ArgumentError, "No aor given") unless @aor
         raise(ArgumentError, "No new: count given") unless @new
         raise(ArgumentError, "No read: count given") unless @read
-#        @options =
-#          {
-#            'MWI-Messages-Waiting' => !@new.zero? ? 'yes' : 'no',
-#            'MWI-Message-Account' => "sip:#{@aor}"
-#          }.tap do |opts|
-#          opts['MWI-Voice-Message'] = "#{@new}/#{@read} (0/0)" if !@new.zero?
-#        end
         if @new.zero?
-          @options = "\nMWI-Messages-Waiting: no\nMWI-Message-Account: sip:#{@aor}"
+          @options = "\r\nMWI-Messages-Waiting: no\r\nMWI-Message-Account: sip:#{@aor}"
         else
-          @options = "\nMWI-Messages-Waiting: yes\nMWI-Message-Account: sip:#{@aor}\nMWI-Voice-Message: #{@new}/#{@read} (0/0)"
+          @options = "\r\nMWI-Messages-Waiting: yes\r\nMWI-Message-Account: sip:#{@aor}\r\nMWI-Voice-Message: #{@new}/#{@read} (0/0)"
         end
       end
 
       # Send the command to the event socket, using api by default.
-      def run(api_method = :sendevent)
-        orig_command = "%s %s" % [api_method, raw]
+      def run
+        orig_command = raw
         Log.debug "saying #{orig_command}"
         puts "saying #{orig_command}"
         @fs_socket.say(orig_command)
@@ -36,7 +29,7 @@ module FSR
     
       # This method builds the API command to send to the freeswitch event socket
       def raw
-        orig_command = " message_waiting #{@options}"
+        orig_command = "sendevent  message_waiting#{@options}"
       end
     end
 
