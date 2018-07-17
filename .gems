@@ -1,5 +1,4 @@
-# .gems generated gem export file. Note that any env variable settings will be missing. Append these after using a ';' field separator
-bacon -v1.1.0
-em-spec -v0.2.6
-eventmachine -v0.12.10
-log4r -v1.1.10
+bacon >= '1.1.0'
+em-spec >= '0.2.6'
+eventmachine >= '1.0'
+log4r >= '1.1.10'
